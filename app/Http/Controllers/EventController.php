@@ -56,4 +56,51 @@ class EventController extends Controller
         ];
         return view('events.show', $dados);
     }
+
+    public function dashboard()
+    {
+        $user = auth()->user();
+
+        $events = $user->events;
+        $dados = [
+            'events' => $events
+        ];
+        return view('events.dashboard', $dados);
+    }
+
+    public function destroy($id)
+    {
+        Event::findOrFail($id)->delete();
+        return redirect('/dashboard')->with('msg', 'Evento excluído com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        $dados = [
+            'event' => $event
+        ];
+        return view('events.edit', $dados);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $this->save_image($request);
+        Event::findOrFail($request->id)->update($data);
+        return redirect('/dashboard')->with('msg', 'Evento editado com sucesso!');
+    }
+
+    private function save_image($request)
+    {
+        $data = $request->all();
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime('now') . '.' . $extension);
+            $requestImage->move(public_path('img/events'), $imageName);
+
+            $data['image'] = $imageName;
+        }
+        return $data;
+    }
 }
