@@ -28,14 +28,14 @@
                     {{$event->title}}
                 </h5>
                 <p class="card-participants">
-                    x- participantes
+                    {{count($event->users)}} participantes
                 </p>
                 <a href="/events/{{$event->id}}" class="btn btn-primary">saber mais</a>
             </div>
         </div>
         @endforeach
         @if (count($events))
-        <p>Não há eventos disponíveis.</p>
+         <p>Não há eventos disponíveis.</p>
         @endif
     </div>
 </div>

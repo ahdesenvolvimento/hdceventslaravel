@@ -204,3 +204,30 @@ footer p {
     width: 100px;
     margin-top: 20px;
 }
+
+.form-login{
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+}
+
+.content-login{
+    box-shadow: 0 0 0.35em black;
+    background-color: #fff;
+    margin: auto 0;
+    border-radius: 15px;
+}
+
+.content-login input{
+    border: 1px solid aqua;
+    border-radius: 5px;
+    box-shadow: 0 0 0.15em black;
+    min-width: 250px;
+
+}
+
+.content-login form{
+    padding: 150px;
+}
